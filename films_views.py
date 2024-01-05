@@ -1,7 +1,7 @@
 from kinopoisk_api.controller import handle_film_request, handle_search_request
 from fastapi import APIRouter
 
-router = APIRouter(prefix='/films')
+router = APIRouter(prefix='/films', tags=['films'])
 
 film_id = 302
 key_word = 'avengers'

@@ -1,32 +1,35 @@
 # -*- coding: Windows-1251 -*-
-
-from db_modul.db_client import DBClient
-from db_modul.film_orms import Base
-from kinopoisk_api.controller import handle_film_request, handle_search_request
+# Импорты FastAPI
 from fastapi import FastAPI
-from app.views.welcome_page import create_welcome
 
+# Импорты, связанные с БД
+from create_db_engine import db_engine
+from db_modul.film_orms import Base
+
+# Импорты роутеров
+from app.views.welcome_page import create_welcome
+from films_views import router as film_router
+from users.views import router as user_router
+
+
+# Создание приложения и включение в него роутеров
 app = FastAPI()
-film_id: int = 302
-key_word: str = "avengers"
+
+app.include_router(film_router)
+app.include_router(user_router)
 
 
 def create_db():
-    db_client: DBClient = DBClient()
-    db_engine = db_client.create_sql_alchemy_engine()
     Base.metadata.create_all(db_engine)
 
 
 def drop_db():
-    db_client: DBClient = DBClient()
-    db_engine = db_client.create_sql_alchemy_engine()
     Base.metadata.drop_all(db_engine)
 
 
 @app.get("/")
 def index():
     return create_welcome()
-
 
 
 # if __name__ == '__main__':

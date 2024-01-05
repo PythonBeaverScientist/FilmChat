@@ -1,16 +1,14 @@
 # -*- coding: Windows-1251 -*-
 
-from db_modul.film_orms import create_film, create_user, create_short_film
+from db_modul.film_db_actions import create_film, create_short_film
 from kinopoisk_api.api_query import APIClient, RequestJson
 from kinopoisk_api.user_models import FilmModel, ShortFilmModel
-from db_modul.db_client import DBClient
+from create_db_engine import db_engine
 import httpx
 from sqlalchemy.orm import Session
 from pydantic import ValidationError
 from base_log import LoggerHand
 
-db_client = DBClient()
-db_engine = db_client.create_sql_alchemy_engine()
 log = LoggerHand(__name__, f"logs/{__name__}.log")
 
 
@@ -25,7 +23,6 @@ def handle_film_request():
             try:
                 film_scheme = FilmModel(**json_res)
                 with Session(db_engine) as db_session:
-                    db_user = create_user(db_session)
                     create_film(db_session, film_scheme)
                     return film_scheme
             except ValidationError as err:
