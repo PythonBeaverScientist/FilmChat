@@ -1,0 +1,1 @@
+API written using fastapi for site with films and features for evaluation and saving. Uses kinopoisk unofficial API as a source of information about movies.
