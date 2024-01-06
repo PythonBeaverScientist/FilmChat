@@ -36,6 +36,8 @@ class Film(Base):
     genres: Column = Column(JSON, nullable=True)
     serial: Column = Column(Boolean, nullable=True)
 
+    mark = relationship('DBMark', back_populates='film')
+
     def __str__(self):
         return base_repr(self)
 
@@ -55,6 +57,7 @@ class ShortFilm(Base):
     def __str__(self):
         return base_repr(self)
 
+
 class User(Base):
     __tablename__ = 'users'
     user_id: Column = Column(Integer, primary_key=True)
@@ -67,6 +70,7 @@ class User(Base):
     reg_date: Column = Column(DateTime)
 
     tokens = relationship('Token', back_populates='user')
+    marks = relationship('DBMark', back_populates='user')
     
     
 class Token(Base): 
@@ -76,6 +80,21 @@ class Token(Base):
     user_id: Column = Column(Integer, ForeignKey("users.user_id"))
 
     user = relationship('User', back_populates='tokens')
+
+    def __str__(self):
+        return base_repr(self)
+
+
+class DBMark(Base):
+    __tablename__ = 'marks'
+    mark_id: Column = Column(Integer, primary_key=True)
+    mark: Column = Column(Integer)
+
+    user_id: Column = Column(Integer, ForeignKey('users.user_id'))
+    film_id: Column = Column(Integer, ForeignKey('films.kinopoiskId'))
+
+    user = relationship('User', back_populates='marks')
+    film = relationship('film', back_populates='marks')
 
     def __str__(self):
         return base_repr(self)

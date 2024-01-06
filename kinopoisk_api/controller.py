@@ -12,8 +12,7 @@ from base_log import LoggerHand
 log = LoggerHand(__name__, f"logs/{__name__}.log")
 
 
-def handle_film_request():
-    film_id: int = 302
+def handle_film_request(film_id: int):
     api_client = APIClient()
     with httpx.Client() as http_session:
         response = api_client.get_film_by_id(http_session, film_id)
@@ -32,11 +31,10 @@ def handle_film_request():
             return None
 
 
-def handle_search_request():
-    key_words: str = "avengers"
+def handle_search_request(key_word: str):
     api_client = APIClient()
     with httpx.Client() as http_session:
-        response = api_client.get_films_lst_by_word(http_session, key_words)
+        response = api_client.get_films_lst_by_word(http_session, key_word)
         if 200 <= response.status_code < 300:
             req_json = RequestJson(response)
             json_res: dict = req_json.serialize_response()
