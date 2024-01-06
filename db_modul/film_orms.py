@@ -54,3 +54,28 @@ class ShortFilm(Base):
 
     def __str__(self):
         return base_repr(self)
+
+class User(Base):
+    __tablename__ = 'users'
+    user_id: Column = Column(Integer, primary_key=True)
+    user_name: Column = Column(String(200), unique=True)
+    password: Column = Column(String(200))
+    email: Column = Column(String(200))
+    first_name: Column = Column(String(200))
+    last_name: Column = Column(String(200))
+    birth_date: Column = Column(DateTime, nullable=True)
+    reg_date: Column = Column(DateTime)
+
+    tokens = relationship('Token', back_populates='user')
+    
+    
+class Token(Base): 
+    __tablename__ = 'tokens'
+    token_id: Column = Column(Integer, primary_key=True)
+    access_token: Column = Column(String(200), unique=True, index=True)
+    user_id: Column = Column(Integer, ForeignKey("users.user_id"))
+
+    user = relationship('User', back_populates='tokens')
+
+    def __str__(self):
+        return base_repr(self)

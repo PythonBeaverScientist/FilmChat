@@ -1,6 +1,7 @@
 import hashlib
 from typing import Optional
 from pydantic import BaseModel, EmailStr, Field, PastDate
+from secure import psw_context
 
 
 class UserModel(BaseModel):
@@ -12,7 +13,4 @@ class UserModel(BaseModel):
     birth_date: Optional[PastDate] = Field(default=None)
 
     def hash_user_psw(self) -> None:
-        md5_hash = hashlib.new('md5')
-        psw: str = self.password
-        md5_hash.update(psw.encode())
-        self.password = md5_hash.hexdigest()
+        self.password = psw_context.hash(self.password)
