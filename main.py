@@ -4,12 +4,14 @@ from fastapi import FastAPI
 
 # Импорты, связанные с БД
 from create_db_engine import db_engine
-from db_modul.film_orms import Base
+from db_modul.orms import Base
+
+# Импорт контроллера стартового запроса для главной страницы
+from controllers.welcome import create_welcome
 
 # Импорты роутеров
-from app.views.welcome_page import create_welcome
-from films_views import router as film_router
-from users.views import router as user_router
+from routers.films import router as film_router
+from routers.users import router as user_router
 from routers.tokens import router as token_router
 from routers.basket import router as basket_router
 

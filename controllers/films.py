@@ -2,7 +2,7 @@
 
 from db_modul.film_db_actions import create_film, create_short_film
 from kinopoisk_api.api_query import APIClient, RequestJson
-from kinopoisk_api.user_models import FilmModel, ShortFilmModel
+from schemas.films import FilmModel, ShortFilmModel
 from create_db_engine import db_engine
 import httpx
 from sqlalchemy.orm import Session

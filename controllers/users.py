@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from db_modul.users_db_actions import create_db_user, get_user, create_user_token, create_mark
-from users.schemas import UserModel, UserAuth, Mark
+from schemas.users import UserModel, UserAuth, Mark
 from create_db_engine import db_engine
 from secure import psw_context
 from fastapi import HTTPException

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from users.crud import authenticate
-from users.schemas import Token
+from controllers.users import authenticate
+from schemas.users import Token
 
 router = APIRouter(prefix='/tokens', tags=['token'])
 

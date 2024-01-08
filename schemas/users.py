@@ -1,4 +1,3 @@
-import hashlib
 from typing import Optional
 from pydantic import BaseModel, EmailStr, Field, PastDate
 from secure import psw_context

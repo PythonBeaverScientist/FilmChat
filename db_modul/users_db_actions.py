@@ -6,8 +6,8 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from starlette.status import HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED
 
-from db_modul.film_orms import User, Token, DBMark
-from users.schemas import UserModel, Mark
+from db_modul.orms import User, Token, DBMark
+from schemas.users import UserModel, Mark
 
 
 def create_db_user(db_session: Session, user_model: UserModel):

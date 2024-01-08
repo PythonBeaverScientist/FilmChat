@@ -1,4 +1,4 @@
-from kinopoisk_api.controller import handle_film_request, handle_search_request
+from controllers.films import handle_film_request, handle_search_request
 from fastapi import APIRouter
 
 router = APIRouter(prefix='/films', tags=['films'])

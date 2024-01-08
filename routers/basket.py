@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from users.crud import set_new_mark
-from users.schemas import Mark
+from controllers.users import set_new_mark
+from schemas.users import Mark
 
 router = APIRouter(prefix='/basket', tags=['basket'])
 

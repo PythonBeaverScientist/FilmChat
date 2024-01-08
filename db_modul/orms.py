@@ -36,7 +36,7 @@ class Film(Base):
     genres: Column = Column(JSON, nullable=True)
     serial: Column = Column(Boolean, nullable=True)
 
-    mark = relationship('DBMark', back_populates='film')
+    marks = relationship('DBMark', back_populates='film')
 
     def __str__(self):
         return base_repr(self)
@@ -94,7 +94,7 @@ class DBMark(Base):
     film_id: Column = Column(Integer, ForeignKey('films.kinopoiskId'))
 
     user = relationship('User', back_populates='marks')
-    film = relationship('film', back_populates='marks')
+    film = relationship('Film', back_populates='marks')
 
     def __str__(self):
         return base_repr(self)

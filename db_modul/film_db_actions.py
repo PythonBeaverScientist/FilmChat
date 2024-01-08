@@ -1,5 +1,5 @@
-from db_modul.film_orms import Film, ShortFilm
-from kinopoisk_api.user_models import FilmModel, ShortFilmModel
+from db_modul.orms import Film, ShortFilm
+from schemas.films import FilmModel, ShortFilmModel
 from sqlalchemy.orm import Session
 
 
